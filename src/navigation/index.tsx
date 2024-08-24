@@ -4,11 +4,9 @@ import RootStackNavigator from './RootStackNavigator';
 
 const Navigation = () => {
   return (
-    <SafeAreaProvider>
-      <NavigationContainer>
-        <RootStackNavigator />
-      </NavigationContainer>
-    </SafeAreaProvider>
+    <NavigationContainer>
+      <RootStackNavigator />
+    </NavigationContainer>
   );
 };
 
