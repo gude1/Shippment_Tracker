@@ -9,7 +9,12 @@ const RootStack = createNativeStackNavigator<RootStackParamList>();
 
 const RootStackNavigator = () => {
   return (
-    <RootStack.Navigator screenOptions={{headerShown: false}}>
+    <RootStack.Navigator
+      screenOptions={{
+        headerShown: false,
+        statusBarStyle: 'dark',
+        statusBarColor: 'white',
+      }}>
       <RootStack.Screen name="RootTab" component={RootBottomTabNavigator} />
     </RootStack.Navigator>
   );

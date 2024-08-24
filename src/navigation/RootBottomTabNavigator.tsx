@@ -117,16 +117,15 @@ const styles = StyleSheet.create({
     width: 30,
     height: 25,
   },
-
   tabLabel: {
     fontFamily: 'SF-Pro-Text-Regular',
     lineHeight: 13,
     fontSize: 11,
     letterSpacing: 0.07,
   },
-
   tabBar: {
     borderTopWidth: 1,
+    elevation: 0,
     borderColor: '#EAE7F2',
   },
 });
