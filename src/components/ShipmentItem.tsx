@@ -120,7 +120,12 @@ const ShipmentItem: React.FC<ShipmentItemProps> = ({
           }}
           useNativeDriver
         />
-        <SvgXml xml={PACKAGE_SVG} style={styles.package} />
+        <SvgXml
+          xml={PACKAGE_SVG}
+          style={styles.package}
+          width={28}
+          height={28}
+        />
 
         <View style={styles.textCtn}>
           <Text style={styles.name} numberOfLines={1} ellipsizeMode="tail">
@@ -133,6 +138,7 @@ const ShipmentItem: React.FC<ShipmentItemProps> = ({
           <View style={styles.tripCtn}>
             <Text
               style={styles.tripCtnOrigin}
+              adjustsFontSizeToFit
               numberOfLines={1}
               ellipsizeMode="tail">
               {originCity || originState}
@@ -141,6 +147,7 @@ const ShipmentItem: React.FC<ShipmentItemProps> = ({
             <Text
               style={styles.tripCtnDes}
               numberOfLines={1}
+              adjustsFontSizeToFit
               ellipsizeMode="tail">
               {destinationCity || destinationState}
             </Text>
@@ -151,6 +158,7 @@ const ShipmentItem: React.FC<ShipmentItemProps> = ({
           <Text
             style={[styles.tripStatusTxt, returnStatusTextStyle()]}
             numberOfLines={1}
+            adjustsFontSizeToFit
             ellipsizeMode="tail">
             {status}
           </Text>
@@ -301,7 +309,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#D9E6FD',
     borderRadius: 5,
     marginLeft: 8,
-    paddingHorizontal: 6,
+    paddingHorizontal: 0,
   },
   tripStatusTxt: {
     fontFamily: 'Inter-Medium',
@@ -314,7 +322,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     width: 24,
     height: 24,
-    marginLeft: 15,
+    marginLeft: '5%',
     backgroundColor: 'white',
     borderRadius: 50,
     alignItems: 'center',
