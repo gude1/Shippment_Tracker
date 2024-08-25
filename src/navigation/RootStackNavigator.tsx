@@ -12,8 +12,8 @@ const RootStackNavigator = () => {
     <RootStack.Navigator
       screenOptions={{
         headerShown: false,
-        statusBarStyle: 'dark',
-        statusBarColor: 'white',
+        animation: 'slide_from_right',
+        orientation: 'portrait',
       }}>
       <RootStack.Screen name="RootTab" component={RootBottomTabNavigator} />
     </RootStack.Navigator>

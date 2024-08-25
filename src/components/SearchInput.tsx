@@ -64,6 +64,7 @@ const SearchInput: React.FC<SearchInputProps> = ({
       <SvgXml xml={SEARCH_SVG} style={{alignSelf: 'center'}} />
       <TextInput
         value={value}
+        autoFocus={false}
         keyboardType="web-search"
         placeholderTextColor={'#A7A3B3'}
         onChangeText={onChangeText}

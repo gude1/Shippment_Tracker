@@ -6,17 +6,22 @@ import {
   StyleSheet,
   TextInputProps,
   TextStyle,
+  StyleProp,
+  ViewStyle,
 } from 'react-native';
+import colors from '../constants/colors';
 
 interface AnimatedTextInputProps extends TextInputProps {
   label: string;
   value: string;
+  style?: StyleProp<ViewStyle>;
   onChangeText: (text: string) => void;
 }
 
 const Input: React.FC<AnimatedTextInputProps> = ({
   label,
   value,
+  style,
   onChangeText,
   ...props
 }) => {
@@ -41,20 +46,20 @@ const Input: React.FC<AnimatedTextInputProps> = ({
     left: 10,
     top: animatedIsFocused.interpolate({
       inputRange: [0, 1],
-      outputRange: [20, 0],
+      outputRange: [25, 8], // Adjust the top position for the focused state
     }) as Animated.AnimatedInterpolation<number>,
     fontSize: animatedIsFocused.interpolate({
       inputRange: [0, 1],
-      outputRange: [16, 12],
+      outputRange: [16, 11],
     }) as Animated.AnimatedInterpolation<number>,
     color: animatedIsFocused.interpolate({
       inputRange: [0, 1],
-      outputRange: ['#aaa', '#000'],
+      outputRange: ['#A7A3B3', '#58536E'],
     }) as Animated.AnimatedInterpolation<string>,
   };
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, style]}>
       <Animated.Text style={labelStyle}>{label}</Animated.Text>
       <TextInput
         value={value}
@@ -70,16 +75,16 @@ const Input: React.FC<AnimatedTextInputProps> = ({
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 20,
     marginBottom: 10,
     backgroundColor: '#f7f7fb',
     borderRadius: 10,
     paddingHorizontal: 10,
   },
   input: {
-    height: 40,
+    height: 56,
     fontSize: 16,
-    color: '#000',
+    marginTop: 5,
+    color: colors.primary,
     paddingHorizontal: 0,
   },
 });

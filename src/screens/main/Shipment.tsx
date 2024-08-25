@@ -1,10 +1,14 @@
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {
+  FlatList,
+  ListRenderItem,
   SafeAreaView,
   StyleSheet,
+  RefreshControl,
   Text,
   TouchableOpacity,
   View,
+  StatusBar,
 } from 'react-native';
 import {RootStackParamList} from '../../navigation/RootStackNavigator';
 import {CompositeScreenProps} from '@react-navigation/native';
@@ -18,10 +22,14 @@ import ShipmentItem from '../../components/ShipmentItem';
 import Button from '../../components/Button';
 import {SvgXml} from 'react-native-svg';
 import {FILTER_SVG, SCAN_SVG} from '../../constants/svg';
-import {useRef, useState} from 'react';
+import {useCallback, useContext, useRef, useState} from 'react';
 import {STATUSES} from '../../constants/data';
-import Input from '../../components/Input';
 import SearchInput from '../../components/SearchInput';
+import {UserContext} from '../../context/UserContext';
+import _ from 'lodash';
+import useFetchShipmentList, {
+  MessageItem,
+} from '../../hooks/useFetchShipmentList';
 
 type ShipmentScreenProps = CompositeScreenProps<
   BottomTabScreenProps<RootBottomTabParamList, 'Shipment'>,
@@ -31,7 +39,13 @@ type ShipmentScreenProps = CompositeScreenProps<
 const Shipment = ({navigation, route}: ShipmentScreenProps) => {
   const refRBSheet = useRef<any>(null);
   const [filters, setFilters] = useState<string[]>([]);
+  const context = useContext(UserContext);
+  const {data, error, fetchData, loading} = useFetchShipmentList({
+    doctype: 'AWB',
+    fields: ['*'],
+  });
   const [searchText, setSearchText] = useState('');
+  const [markAll, setMarkAll] = useState(false);
 
   const handleFilterUpdate = (item: string) => {
     let newfilters = [...filters];
@@ -45,19 +59,61 @@ const Shipment = ({navigation, route}: ShipmentScreenProps) => {
     setFilters(newfilters);
   };
 
+  const debouncedFetchSearchResults = useCallback(
+    _.debounce(text => {
+      fetchData({
+        doctype: 'AWB',
+        fields: ['*'],
+        filters: {
+          name: ['like', `%${text}%`],
+        },
+      });
+    }, 500),
+    [],
+  );
+
+  const handleSearchByName = (text: string) => {
+    setSearchText(text);
+    debouncedFetchSearchResults(text);
+  };
+
+  const keyExtractor = (item: MessageItem, index: number) => {
+    return `${item.name}`;
+  };
+
+  const renderShipments: ListRenderItem<MessageItem> | null | undefined = ({
+    item,
+    index,
+  }) => {
+    return (
+      <ShipmentItem
+        status={index % 2 > 0 ? 'Received' : 'Canceled'}
+        isChecked={markAll}
+        originState={item.origin_state}
+        originCity={item.origin_city}
+        destinationCity={item.destination_city}
+        destinationState={item.destination_state}
+        name={item.name}
+        style={{marginTop: 8}}
+      />
+    );
+  };
+
   return (
     <SafeAreaView style={{flex: 1}}>
       <Header />
+      <StatusBar backgroundColor={'white'} barStyle={'dark-content'} />
       <View style={styles.container}>
         <Text style={styles.welcomeTxt}>Hello,</Text>
-        <Text style={styles.userName}>Ibrahim Shaker</Text>
+        <Text style={styles.userName}>
+          {context?.user?.full_name || 'Ibrahim Shaker'}
+        </Text>
 
         <SearchInput
           style={styles.input}
+          placeholder="Search by name"
           value={searchText}
-          onChangeText={text => {
-            setSearchText(text);
-          }}
+          onChangeText={handleSearchByName}
         />
 
         <View style={styles.btnCtn}>
@@ -84,6 +140,10 @@ const Shipment = ({navigation, route}: ShipmentScreenProps) => {
           <View style={styles.listCheckCtn}>
             <BouncyCheckbox
               size={20}
+              isChecked={markAll}
+              onPress={(check: boolean) => {
+                setMarkAll(check);
+              }}
               fillColor={'#D9E6FD'}
               unFillColor="transparent"
               iconImageStyle={{tintColor: colors.primary}}
@@ -96,7 +156,26 @@ const Shipment = ({navigation, route}: ShipmentScreenProps) => {
           </View>
         </View>
 
-        <ShipmentItem style={{marginTop: 8}} />
+        <FlatList
+          keyExtractor={keyExtractor}
+          showsVerticalScrollIndicator={false}
+          initialNumToRender={5}
+          data={data?.message || []}
+          refreshControl={
+            <RefreshControl
+              size={80}
+              tintColor={colors.primary}
+              refreshing={loading}
+              onRefresh={() => {
+                fetchData({
+                  doctype: 'AWB',
+                  fields: ['*'],
+                });
+              }}
+            />
+          }
+          renderItem={renderShipments}
+        />
 
         <RBSheet
           ref={refRBSheet}

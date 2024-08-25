@@ -19,20 +19,36 @@ import {
   WHATSAPP_SVG,
 } from '../constants/svg';
 import Button from './Button';
-import {useRef, useState} from 'react';
+import {useEffect, useRef, useState} from 'react';
 
 interface ShipmentItemProps {
   style?: StyleProp<ViewStyle>;
+  name: string;
+  isChecked?: boolean;
+  originState?: string;
+  destinationState?: string;
+  destinationCity?: string;
+  originCity?: string;
   status?: 'Received' | 'Error' | 'Delivered' | 'Canceled' | 'on hold';
 }
 
 const ShipmentItem: React.FC<ShipmentItemProps> = ({
   style,
+  name,
+  originState,
+  isChecked = false,
+  originCity,
+  destinationCity,
+  destinationState,
   status = 'Received',
 }) => {
   const [expanded, setExpanded] = useState(false);
-  const [checked, setChecked] = useState(false);
+  const [checked, setChecked] = useState(isChecked);
   const animation = useRef(new Animated.Value(0)).current;
+
+  useEffect(() => {
+    setChecked(isChecked);
+  }, [isChecked]);
 
   const toggleExpand = () => {
     const finalValue = expanded ? 0 : 1;
@@ -111,7 +127,7 @@ const ShipmentItem: React.FC<ShipmentItemProps> = ({
             AWB
           </Text>
           <Text style={styles.shipcode} numberOfLines={1} ellipsizeMode="tail">
-            41785691423
+            {name}
           </Text>
 
           <View style={styles.tripCtn}>
@@ -119,14 +135,14 @@ const ShipmentItem: React.FC<ShipmentItemProps> = ({
               style={styles.tripCtnOrigin}
               numberOfLines={1}
               ellipsizeMode="tail">
-              Cairo
+              {originCity || originState}
             </Text>
-            <SvgXml xml={ARROW_RIGHT_SVG} style={{marginHorizontal: 8}} />
+            <SvgXml xml={ARROW_RIGHT_SVG} style={{marginHorizontal: 2}} />
             <Text
               style={styles.tripCtnDes}
               numberOfLines={1}
               ellipsizeMode="tail">
-              Alexandria
+              {destinationCity || destinationState}
             </Text>
           </View>
         </View>
@@ -177,7 +193,7 @@ const ShipmentItem: React.FC<ShipmentItemProps> = ({
               style={styles.tripDetailsOrigin}
               numberOfLines={1}
               ellipsizeMode="tail">
-              Cairo
+              {originCity || originState}
             </Text>
             <Text
               style={styles.tripDetailsAddress}
@@ -284,7 +300,7 @@ const styles = StyleSheet.create({
     borderColor: 'white',
     backgroundColor: '#D9E6FD',
     borderRadius: 5,
-    marginLeft: 15,
+    marginLeft: 8,
     paddingHorizontal: 6,
   },
   tripStatusTxt: {
@@ -298,7 +314,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     width: 24,
     height: 24,
-    marginLeft: 19,
+    marginLeft: 15,
     backgroundColor: 'white',
     borderRadius: 50,
     alignItems: 'center',
