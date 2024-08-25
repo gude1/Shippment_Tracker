@@ -57,13 +57,14 @@ const OnBoard = ({navigation, route}: OnBoardScreenProps) => {
         return;
       }
 
+      setProcessing(true);
       const result = await logUserIn({
         usr: userTxt,
         pwd: password,
       });
 
-      if (result.error) {
-        Alert.alert(result.error);
+      if (result?.error) {
+        Alert.alert(result?.error);
         return;
       }
       context?.setUser({full_name: result.full_name || ''});
