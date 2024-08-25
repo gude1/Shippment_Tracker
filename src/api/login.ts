@@ -10,11 +10,11 @@ export const logUserIn = async (param: LoginParam): Promise<LoginResponse> => {
       },
     });
 
-    return res.data;
+    return res?.data;
   } catch (error) {
-    if (axios.isAxiosError(error) && error.message) {
+    if (axios.isAxiosError(error) && error?.message) {
       return {
-        error: error.response?.data?.message,
+        error: error?.response?.data?.message || "Request Failed please try again",
       };
     }
 
