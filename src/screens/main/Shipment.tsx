@@ -174,7 +174,6 @@ const Shipment = ({navigation, route}: ShipmentScreenProps) => {
           data={data?.message || []}
           refreshControl={
             <RefreshControl
-              size={80}
               tintColor={colors.primary}
               refreshing={loading}
               onRefresh={() => {
