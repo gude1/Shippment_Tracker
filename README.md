@@ -6,7 +6,7 @@ This is a Shipment Tracker App built with bare react-native(v0.75)
 
 ## Step 1:git clone the repo 
 
-First, you clone the repo.
+First, you clone the repo and navigate into the root directory of the app
 
 ## Step 2: Install all necessary dependencies
 ```bash
