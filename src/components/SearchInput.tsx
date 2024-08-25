@@ -97,11 +97,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: 14,
     overflow: 'hidden',
     width: '100%',
-    maxWidth: 361,
+    maxWidth: 500,
   },
   textInput: {
     fontFamily: 'Inter-Regular',
-    color:"black",
+    color: 'black',
     fontSize: 16,
     marginLeft: 8,
     letterSpacing: 0,

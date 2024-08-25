@@ -65,7 +65,7 @@ export default Button;
 
 const styles = StyleSheet.create({
   btnCtn: {
-    width: '100%',
+    width: '90%',
     maxWidth: 361,
   },
   button: {

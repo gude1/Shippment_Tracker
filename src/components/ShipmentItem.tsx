@@ -68,7 +68,7 @@ const ShipmentItem: React.FC<ShipmentItemProps> = ({
 
   const paddingInterpolate = animation.interpolate({
     inputRange: [0, 1],
-    outputRange: [0, 10], // Original padding value
+    outputRange: [0, 5], // Original padding value
   });
 
   const returnStatusTextStyle = () => {
@@ -138,7 +138,6 @@ const ShipmentItem: React.FC<ShipmentItemProps> = ({
           <View style={styles.tripCtn}>
             <Text
               style={styles.tripCtnOrigin}
-              adjustsFontSizeToFit
               numberOfLines={1}
               ellipsizeMode="tail">
               {originCity || originState}
@@ -147,7 +146,6 @@ const ShipmentItem: React.FC<ShipmentItemProps> = ({
             <Text
               style={styles.tripCtnDes}
               numberOfLines={1}
-              adjustsFontSizeToFit
               ellipsizeMode="tail">
               {destinationCity || destinationState}
             </Text>
@@ -158,15 +156,17 @@ const ShipmentItem: React.FC<ShipmentItemProps> = ({
           <Text
             style={[styles.tripStatusTxt, returnStatusTextStyle()]}
             numberOfLines={1}
-            adjustsFontSizeToFit
             ellipsizeMode="tail">
             {status}
           </Text>
         </View>
 
-        <View
-          style={[styles.expandIconCtn, expanded && styles.expandedIconCtn]}>
-          <TouchableOpacity activeOpacity={0.8} onPress={toggleExpand}>
+        <TouchableOpacity
+          activeOpacity={0.8}
+          onPress={toggleExpand}
+          style={{marginLeft: 19}}>
+          <View
+            style={[styles.expandIconCtn, expanded && styles.expandedIconCtn]}>
             <Image
               source={require('../assets/images/arrow-expand.png')}
               style={{
@@ -175,14 +175,14 @@ const ShipmentItem: React.FC<ShipmentItemProps> = ({
                 tintColor: expanded ? 'white' : '#4561DB',
               }}
             />
-          </TouchableOpacity>
 
-          {/* <SvgFromXml
+            {/* <SvgFromXml
             xml={DIRECTION_SVG}
             onPress={toggleExpand}
             stroke={'white'}
           /> */}
-        </View>
+          </View>
+        </TouchableOpacity>
       </View>
       <Animated.View
         style={[
@@ -258,12 +258,14 @@ export default ShipmentItem;
 const styles = StyleSheet.create({
   container: {
     borderRadius: 8,
+    width: '100%',
     overflow: 'hidden',
   },
   sectionOne: {
     minHeight: 67,
     flexDirection: 'row',
-    paddingLeft: 12,
+    justifyContent: 'space-evenly',
+    paddingHorizontal: 12,
     paddingVertical: 12,
     alignItems: 'center',
     backgroundColor: '#F4F2F8',
@@ -272,49 +274,49 @@ const styles = StyleSheet.create({
     marginLeft: 12,
   },
   textCtn: {
+    flex: 1,
     marginLeft: 12,
   },
   name: {
     fontFamily: 'Inter-Regular',
     fontSize: 13,
     color: '#3F395C',
-    letterSpacing: 0,
   },
   shipcode: {
     fontFamily: 'Inter-SemiBold',
     fontSize: 18,
     color: 'black',
-    letterSpacing: 0,
   },
   tripCtn: {
     alignItems: 'center',
+    // borderWidth: 1,
+    flex: 1,
     flexDirection: 'row',
   },
   tripCtnOrigin: {
     color: '#757281',
+    flex: 1,
     fontFamily: 'Inter-Regular',
     fontSize: 13,
-    letterSpacing: 0,
   },
   tripCtnDes: {
     color: '#757281',
+    flex: 1,
     fontFamily: 'Inter-Regular',
     fontSize: 13,
-    letterSpacing: 0,
   },
   tripStatus: {
     paddingVertical: 4,
+    paddingHorizontal: 8,
+    borderRadius: 5,
     borderWidth: 1,
     borderColor: 'white',
-    backgroundColor: '#D9E6FD',
-    borderRadius: 5,
     marginLeft: 8,
-    paddingHorizontal: 0,
+    backgroundColor: '#D9E6FD',
   },
   tripStatusTxt: {
     fontFamily: 'Inter-Medium',
     fontSize: 11,
-    letterSpacing: 0,
     textTransform: 'uppercase',
     color: colors.primary,
   },
@@ -322,7 +324,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     width: 24,
     height: 24,
-    marginLeft: '5%',
     backgroundColor: 'white',
     borderRadius: 50,
     alignItems: 'center',
@@ -332,11 +333,9 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: '#D0D5DD',
   },
-  expandIcon: {},
   sectionTwo: {
     paddingHorizontal: 12,
     paddingVertical: 10,
-    minHeight: 40,
     backgroundColor: 'rgba(244, 242, 248, 0.5)',
   },
   tripDetailsCtn: {
@@ -344,20 +343,21 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
   },
+  detailsColumn: {
+    flex: 1,
+  },
   tripDetailsTitle: {
     fontFamily: 'Inter-Regular',
     fontSize: 11,
-    letterSpacing: 0,
     color: colors.primary,
   },
   tripDetailsOrigin: {
     fontFamily: 'Inter-Regular',
     fontSize: 16,
     color: 'black',
-    letterSpacing: 0,
   },
   tripDetailsAddress: {
-    fontFamily: 'Inter-Light',
+    fontFamily: '',
     fontSize: 13,
     color: '#58536E',
   },

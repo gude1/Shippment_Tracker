@@ -165,6 +165,7 @@ const OnBoard = ({navigation, route}: OnBoardScreenProps) => {
           <Button
             title="Login"
             onPress={logIn}
+            containerStyle={{alignSelf: 'center'}}
             loadng={processing}
             disabled={returnIsBtnDisabled() || processing}
           />
