@@ -1,45 +1,46 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+This is a Shipment Tracker App built with bare react-native(v0.75)
 
 # Getting Started
 
->**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
+>**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions for react-native version 0.75
 
-## Step 1: Start the Metro Server
+## Step 1:git clone the repo 
 
-First, you will need to start **Metro**, the JavaScript _bundler_ that ships _with_ React Native.
+First, you clone the repo.
 
-To start Metro, run the following command from the _root_ of your React Native project:
-
+## Step 2: Install all necessary dependencies
 ```bash
 # using npm
-npm start
+npm install
 
 # OR using Yarn
-yarn start
+yarn install
 ```
 
-## Step 2: Start your Application
-
-Let Metro Bundler run in its _own_ terminal. Open a _new_ terminal from the _root_ of your React Native project. Run the following command to start your _Android_ or _iOS_ app:
-
-### For Android
-
+## Step 3: Start on ios and android
 ```bash
-# using npm
-npm run android
+cd ios && pod install
 
-# OR using Yarn
-yarn android
-```
-
-### For iOS
-
-```bash
 # using npm
 npm run ios
 
 # OR using Yarn
 yarn ios
+
+# using npm
+npm run android
+
+# OR using Yarn
+yarn android
+
+```
+
+### Step 4: Login
+login with the test credentials
+
+```bash
+email: test@brandimic.com
+password:testy123@
 ```
 
 If everything is set up _correctly_, you should see your new app running in your _Android Emulator_ or _iOS Simulator_ shortly provided you have set up your emulator/simulator correctly.
