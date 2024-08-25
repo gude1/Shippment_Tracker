@@ -1,5 +1,8 @@
 This is a Shipment Tracker App built with bare react-native(v0.75)
 
+https://github.com/user-attachments/assets/01bf179c-b77c-40c8-9df4-1d8627741185
+
+
 # Getting Started
 
 >**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions for react-native version 0.75
