@@ -256,7 +256,7 @@ const styles = StyleSheet.create({
     width: '100%',
     flex: 1,
     alignSelf: 'center',
-    maxWidth: 800,
+    maxWidth: 700,
     paddingHorizontal: 16,
     paddingVertical: 12,
     backgroundColor: 'white',
@@ -280,8 +280,8 @@ const styles = StyleSheet.create({
   btnCtn: {
     marginTop: 24,
     width: '100%',
+    justifyContent: 'space-between',
     flexDirection: 'row',
-    maxWidth: 361,
   },
   actionBtnTxt: {
     fontFamily: 'Inter-Regular',
