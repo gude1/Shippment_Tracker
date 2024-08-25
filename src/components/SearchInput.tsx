@@ -101,6 +101,7 @@ const styles = StyleSheet.create({
   },
   textInput: {
     fontFamily: 'Inter-Regular',
+    color:"black",
     fontSize: 16,
     marginLeft: 8,
     letterSpacing: 0,
