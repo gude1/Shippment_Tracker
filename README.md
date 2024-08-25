@@ -49,4 +49,4 @@ password:testy123@
 
 ## Apk download
 Download apk here
-- https://reactnative.dev](https://drive.google.com/file/d/13bzc75jlz4OsfqcvN8clFhuY_TgBbrNe/view?usp=drive_link
+- https://drive.google.com/file/d/13bzc75jlz4OsfqcvN8clFhuY_TgBbrNe/view?usp=drive_link
