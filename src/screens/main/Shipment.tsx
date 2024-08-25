@@ -22,7 +22,7 @@ import ShipmentItem from '../../components/ShipmentItem';
 import Button from '../../components/Button';
 import {SvgXml} from 'react-native-svg';
 import {FILTER_SVG, SCAN_SVG} from '../../constants/svg';
-import {useCallback, useContext, useRef, useState} from 'react';
+import {useCallback, useContext, useEffect, useRef, useState} from 'react';
 import {STATUSES} from '../../constants/data';
 import SearchInput from '../../components/SearchInput';
 import {UserContext} from '../../context/UserContext';
@@ -30,6 +30,7 @@ import _ from 'lodash';
 import useFetchShipmentList, {
   MessageItem,
 } from '../../hooks/useFetchShipmentList';
+import {showMessage} from 'react-native-flash-message';
 
 type ShipmentScreenProps = CompositeScreenProps<
   BottomTabScreenProps<RootBottomTabParamList, 'Shipment'>,
@@ -46,6 +47,16 @@ const Shipment = ({navigation, route}: ShipmentScreenProps) => {
   });
   const [searchText, setSearchText] = useState('');
   const [markAll, setMarkAll] = useState(false);
+
+  useEffect(() => {
+    if (error) {
+      showMessage({
+        type: 'danger',
+        message: error,
+        duration: 2000,
+      });
+    }
+  }, [error]);
 
   const handleFilterUpdate = (item: string) => {
     let newfilters = [...filters];

@@ -216,7 +216,7 @@ const ShipmentItem: React.FC<ShipmentItemProps> = ({
               style={styles.tripDetailsOrigin}
               numberOfLines={1}
               ellipsizeMode="tail">
-              Alexandria
+              {destinationCity || destinationState}
             </Text>
             <Text
               style={styles.tripDetailsAddress}

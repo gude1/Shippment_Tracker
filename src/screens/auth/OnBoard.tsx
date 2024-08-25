@@ -1,5 +1,6 @@
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {
+  Alert,
   Image,
   SafeAreaView,
   ScrollView,
@@ -43,27 +44,16 @@ const OnBoard = ({navigation, route}: OnBoardScreenProps) => {
       let userTxtErr = validateEmail(userTxt);
       let passerr = validateFilled(password);
       if (urlerr) {
-        showMessage({
-          message: 'Url Input is not valid',
-          type: 'danger',
-          duration: 2000,
-        });
+        Alert.alert('Url Input is not valid');
         return;
       }
       if (userTxtErr) {
-        showMessage({
-          message: 'Email Input is not valid',
-          type: 'danger',
-          duration: 2000,
-        });
+        Alert.alert('Email Input is not valid');
+        return;
         return;
       }
       if (passerr) {
-        showMessage({
-          message: 'Password cannot be empty',
-          type: 'danger',
-          duration: 2000,
-        });
+        Alert.alert('Password Input is not valid');
         return;
       }
 
@@ -73,20 +63,12 @@ const OnBoard = ({navigation, route}: OnBoardScreenProps) => {
       });
 
       if (result.error) {
-        showMessage({
-          message: result.error || 'Request failed please try again',
-          type: 'danger',
-          duration: 2000,
-        });
+        Alert.alert(result.error);
         return;
       }
       context?.setUser({full_name: result.full_name || ''});
     } catch (err) {
-      showMessage({
-        message: 'Request failed please try again',
-        type: 'danger',
-        duration: 2000,
-      });
+      Alert.alert('Request failed please try again');
     } finally {
       setProcessing(false);
     }

@@ -1,4 +1,4 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {SafeAreaView, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import {CompositeScreenProps} from '@react-navigation/native';
 import {BottomTabScreenProps} from '@react-navigation/bottom-tabs';
@@ -12,12 +12,20 @@ type ProfileScreenProps = CompositeScreenProps<
 >;
 const Profile = ({}: ProfileScreenProps) => {
   return (
-    <View>
-      <Text>Profile</Text>
-    </View>
+    <SafeAreaView style={styles.container}>
+      <View>
+        <Text>Profile</Text>
+      </View>
+    </SafeAreaView>
   );
 };
 
 export default Profile;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+});

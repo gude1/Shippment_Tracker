@@ -1,4 +1,4 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {SafeAreaView, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import {CompositeScreenProps} from '@react-navigation/native';
 import {BottomTabScreenProps} from '@react-navigation/bottom-tabs';
@@ -12,12 +12,20 @@ type ScanScreenProps = CompositeScreenProps<
 >;
 const Scan = ({}: ScanScreenProps) => {
   return (
-    <View>
-      <Text>Scan</Text>
-    </View>
+    <SafeAreaView style={styles.container}>
+      <View>
+        <Text>Scan</Text>
+      </View>
+    </SafeAreaView>
   );
 };
 
 export default Scan;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+});
